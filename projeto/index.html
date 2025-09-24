@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Plantas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#388E3C"> </head>
+<body>
+
+    <header>
+        <h1>Guia de Plantas</h1>
+    </header>
+
+    <main>
+        <div id="camera-section">
+            <p class="instruction-text">Aponte sua câmera para uma planta!</p>
+            <video id="camera-feed" autoplay playsinline></video>
+            <button id="capture-btn">Tirar Foto</button>
+            <p class="error-message" style="display: none;"></p>
+        </div>
+
+        <div id="results-section" style="display: none;">
+            <h2>Planta Identificada!</h2>
+            <div class="result-card">
+                <img id="captured-image-display" alt="Planta capturada">
+                <p class="loading" style="display: none;">Identificando...</p>
+                <h3 id="plant-name"></h3>
+                <p id="confidence-score"></p>
+                <div class="plant-details">
+                    </div>
+            </div>
+            <button id="retake-btn">Tirar Outra Foto</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Registro do Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registrado com sucesso!', reg.scope))
+                    .catch(err => console.error('Falha no registro do Service Worker:', err));
+            });
+        }
+    </script>
+</body>
+</html>
